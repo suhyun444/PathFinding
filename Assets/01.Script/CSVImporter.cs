@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class CSVImporter
 {
-    // Start is called before the first frame update
-    void Start()
+    public static List<string> Extract(string path)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        TextAsset textAsset = Resources.Load(path) as TextAsset;
+        StringReader sr = new StringReader(textAsset.text);
+        List<string> text = new List<string>();
+        while(sr.Peek() != -1)
+        {
+            text.Add(sr.ReadLine());
+        }
+        return text;
     }
 }
