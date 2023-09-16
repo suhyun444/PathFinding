@@ -8,6 +8,7 @@ public class CSVImporter
     public static List<string> Extract(string path)
     {
         TextAsset textAsset = Resources.Load(path) as TextAsset;
+        if(textAsset == null)return null;
         StringReader sr = new StringReader(textAsset.text);
         List<string> text = new List<string>();
         while(sr.Peek() != -1)

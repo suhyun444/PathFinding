@@ -22,6 +22,7 @@ public class CustomButton : MonoBehaviour, IPointerClickHandler
     }
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log("click");
         clickCallBack.Invoke();
     }
 }
