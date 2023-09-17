@@ -62,8 +62,8 @@ public class MapEditor : MonoBehaviour
                 Vector3 movingVector = mousePosition - prevPosition;
                 prevPosition = mousePosition;
                 mapParent.position += movingVector * dragSensitivity;
-                float maxX = Mathf.Max(0,mapData.m - 16) * 0.5f;
-                float maxY = Mathf.Max(0,mapData.n - 16) * 0.5f;
+                float maxX = Mathf.Max(0,mapData.m - 15) * 0.5f;
+                float maxY = Mathf.Max(0,mapData.n - 15) * 0.5f;
                 mapParent.localPosition = new Vector3(Mathf.Clamp(mapParent.localPosition.x,-maxX,0),Mathf.Clamp(mapParent.localPosition.y,0,maxY),0);
             }
             else if(Input.GetMouseButtonUp(2))

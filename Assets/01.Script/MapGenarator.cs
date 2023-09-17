@@ -7,10 +7,11 @@ public class MapGenarator : MonoBehaviour
 {
     [SerializeField] private string mapId;
     [SerializeField] private BlockData[] blockDatas;
-    [SerializeField] GameObject player;
+    [SerializeField] Player player;
     private MapData mapData;
     private void Awake() {
         mapData = new MapData(mapId);
+        player.Init(mapData);
         GetBlockData();
         CreateMap();
     }
@@ -30,6 +31,7 @@ public class MapGenarator : MonoBehaviour
             {
                 Block b = Instantiate(blockPrefab,new Vector3(startX + j * 0.5f,startY - i * 0.5f,0),Quaternion.identity).GetComponent<Block>();
                 b.BindSprite(blockDatas[mapData.data[i,j]].sprite);
+                b.BindPosition(i,j);
             }
         }
     }
