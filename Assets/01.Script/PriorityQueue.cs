@@ -39,7 +39,7 @@ public class PriorityQueue<T> where T : System.IComparable
         while(true)
         {
             bool changed = false;
-            if(length >= curIndex * 2 + 1)
+            if(length > curIndex * 2 + 1)
             {
                 if(tree[curIndex * 2].CompareTo(tree[curIndex * 2 + 1]) < 0 )
                 {
@@ -64,7 +64,7 @@ public class PriorityQueue<T> where T : System.IComparable
                     }
                 }
             }
-            if(length == curIndex * 2)
+            else if(length > curIndex * 2)
             {
                 if (tree[curIndex * 2].CompareTo(tree[curIndex * 2 + 1]) < 0)
                 {
