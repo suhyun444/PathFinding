@@ -7,10 +7,10 @@ public class MapEditor : MonoBehaviour
 {
     [SerializeField] private Transform mapParent;
     [SerializeField] private string mapId;
-    [SerializeField] private BlockData[] blockDatas;
     [SerializeField] CustomButton addRowButton;
     [SerializeField] CustomButton addColButton;
     [SerializeField] CustomButton saveButton;
+    private BlockData[] blockDatas;
     GameObject blockPrefab;
     Block[,] map;
     private int curBlockType = 0;    
