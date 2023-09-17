@@ -13,7 +13,8 @@ public class MapEditor : MonoBehaviour
     private BlockData[] blockDatas;
     GameObject blockPrefab;
     Block[,] map;
-    private int curBlockType = 0;    
+    private int curBlockType = 0;
+    private TaskHistory taskHistory;    
     private MapData mapData;
     public float dragSensitivity;
     private Vector3 prevPosition;
@@ -21,6 +22,7 @@ public class MapEditor : MonoBehaviour
     private void Awake() 
     {
         GetBlockData();
+        taskHistory = new TaskHistory();
         mapData = new MapData(mapId);
         blockPrefab = Resources.Load("BlockPrefab") as GameObject;
         InstantiateMap();
@@ -39,7 +41,7 @@ public class MapEditor : MonoBehaviour
                 if(hit2D[i].collider != null && hit2D[i].collider.gameObject.CompareTag("Block"))
                 {
                     Block b = hit2D[i].collider.GetComponent<Block>();
-                    UpdateBlock(b);
+                    UpdateBlock(b,curBlockType);
                 }
             }
         }
@@ -71,12 +73,19 @@ public class MapEditor : MonoBehaviour
                 onDrag = false;
             }
         }
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            taskHistory.Undo();
+        }
     }
-    private void UpdateBlock(Block block)
+    private void UpdateBlock(Block block,int type)
     {
-        if(mapData.data[block.y,block.x] == curBlockType)return;
-        block.BindSprite(blockDatas[curBlockType].sprite);
-        mapData.data[block.y,block.x] = curBlockType;
+        if(mapData.data[block.y,block.x] == type)return;
+        Block undoBlock = block;
+        int undoType = mapData.data[block.y, block.x];
+        taskHistory.AddUndoTask(()=>UpdateBlock(undoBlock,undoType));
+        block.BindSprite(blockDatas[type].sprite);
+        mapData.data[block.y,block.x] = type;
     }
     private void GetBlockData()
     {
