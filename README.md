@@ -3,8 +3,8 @@ A* 알고리즘을 이용한 길찾기 와 간단한 맵 에디터 기능을 구
 <img src = "MapEditor.gif">
 <p align="center">
 맵 에디터 화면
-  <\p>
+</p>
 <img src = "PathFind.gif">
 <p align="center">
 길찾기 화면
-  <\p>
+</p>
